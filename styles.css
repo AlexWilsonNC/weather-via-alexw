@@ -38,9 +38,10 @@ input {
     padding-left: 10px;
     border-radius: 2px;
     border-style: none;
+    margin-right: 5px;
 }
 
-#search-history {
+.search-history {
     width: 280px;
     height: 130px;
     position: relative;
@@ -48,7 +49,7 @@ input {
     top: 10px;
 }
 
-#search-history p {
+.search-history p {
     margin-bottom: 9px;
     color: black;
 }
