@@ -15,7 +15,7 @@
 <body>
     <div class="left">
         <h1>Find a City:</h1>
-        <input type="text" id="text-field" name="text-field" placeholder="New Search" /><button id="search-button">search</button>
+        <input type="text" id="text-field" name="text-field" placeholder="New Search" /><button id="search-button">Search</button>
         <div class="search-history">
             <p></p>
             <p></p>
@@ -25,16 +25,59 @@
         </div>
     </div>
 
-    <section class="current hover"></section>
+    <section class="current hover">
+        <header class="current-header">Atlanta</header>
+        <p id="current-date"></p>
+        <hr>
+        <p class="current-sections" id="current-temp"></p>
+        <p class="current-sections" id="current-wind"></p>
+        <p class="current-sections" id="current-humidity"></p>
+        <p class="current-sections" id="current-uvi"></p>
+    </section>
 
     <main class="main">
-        <div class="box hover" id="day1"></div>
-        <div class="box hover" id="day2"></div>
-        <div class="box hover" id="day3"></div>
-        <div class="box hover" id="day4"></div>
-        <div class="box hover" id="day5"></div>
+        <div class="box hover">
+            <header class="forecast-header" id="day1"></header>
+            <p class="forecast-temp"></p>
+            <p class="forecast-wind">Wind: 5mph</p>
+            <p class="forecast-humidity">Humidity: 43%</p>
+            <p class="forecast-icon"></p>
+        </div>
+        <div class="box hover">
+            <header class="forecast-header" id="day2"></header>
+            <p class="forecast-temp">Temp: 70</p>
+            <p class="forecast-wind">Wind: 5mph</p>
+            <p class="forecast-humidity">Humidity: 43%</p>
+            <p class="forecast-icon"></p>
+
+        </div>
+        <div class="box hover">
+            <header class="forecast-header" id="day3"></header>
+            <p class="forecast-temp">Temp: 70</p>
+            <p class="forecast-wind">Wind: 5mph</p>
+            <p class="forecast-humidity">Humidity: 43%</p>
+            <p class="forecast-icon"></p>
+
+        </div>
+        <div class="box hover">
+            <header class="forecast-header" id="day4"></header>
+            <p class="forecast-temp">Temp: 70</p>
+            <p class="forecast-wind">Wind: 5mph</p>
+            <p class="forecast-humidity">Humidity: 43%</p>
+            <p class="forecast-icon"></p>
+
+        </div>
+        <div class="box hover">
+            <header class="forecast-header" id="day5"></header>
+            <p class="forecast-temp">Temp: 70</p>
+            <p class="forecast-wind">Wind: 5mph</p>
+            <p class="forecast-humidity">Humidity: 43%</p>
+            <p class="forecast-icon"></p>
+
+        </div>
     </main>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="script.js"></script>
 </body>
 
