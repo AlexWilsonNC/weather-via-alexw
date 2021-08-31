@@ -1,11 +1,8 @@
-# weather-via-alexw
-06 Server-Side APIs: Weather Dashboard HW
+# Weather via Alex
+## 06 Server-Side APIs: Weather Dashboard HW
 
-##Checklist:
+- [Link to Live site](https://alexwilsonnc.github.io/weather-via-alexw/)
+- [Link to Github repo](https://github.com/AlexWilsonNC/weather-via-alexw)
 
-Current day: City Name
-             Date
-             Icon repping conditions
-             Temp
-             Humidity
-             *UV Index
+## Screenshot
+![screenshot](assets/screenshot.jpg)
