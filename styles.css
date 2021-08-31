@@ -60,6 +60,11 @@ button {
     border-style: none;
 }
 
+button:hover {
+    cursor: pointer;
+    box-shadow: 0 0 5px black;
+}
+
 .current {
     border-radius: 10px;
     width: 1010px;
