@@ -1,5 +1,4 @@
 var APIKey = "c96ff37ce7e15d7cf6a6ddc995e12f66";
-var APIKeyX5 = "2843ffe10fd5dc14d3db387170013c66";
 
 var today = moment();
 var currentDate = document.getElementById('current-date');
@@ -20,8 +19,6 @@ var currentHumidity = document.getElementById('current-humidity');
 var currentUvi = document.getElementById('current-uvi');
 var iconCurrent = document.getElementById('iconCurrent');
 
-var cityList = [];
-
 function searchForCity(event) {
     event.preventDefault();
     var cityName = searchField.value.charAt(0).toUpperCase() + searchField.value.slice(1).toLowerCase();
@@ -39,10 +36,6 @@ function searchForCity(event) {
             currentWind.textContent = "Wind: " + parseInt(data.wind.speed) + "mph";
             currentHumidity.textContent = "Humidity: " + data.main.humidity + "%";
             currentUvi.textContent = "UVi: 0.55"; // example, replace
-            var weatherIcon = document.getElementById('iconCurrent');
-            var currentIcon = data.weather[0].icon;
-            weatherIcon.setAttribute('src', `http://openweathermap.org/img/wn/${currentIcon}.png`);
-            weatherIcon.setAttribute('alt', data.weather[0].icon)
             currentDate.textContent = currentDateAtSearch;
             tomorrow.textContent = today.add(1, 'd').format('ddd, MMM D'); // today +1
             day2.textContent = today.add(1, 'd').format('ddd, MMM D'); // plus a day each count followed
@@ -50,9 +43,6 @@ function searchForCity(event) {
             day4.textContent = today.add(1, 'd').format('ddd, MMM D');
             day5.textContent = today.add(1, 'd').format('ddd, MMM D');
             var header = document.getElementById('current-header').textContent = cityName;
-            // if (data.weather[0].description === "overcast clouds") {
-            //     document.getElementById('cloud-current').classList.remove('hide');
-            // }
         });
 
     fetch(requestUrlForecast)
@@ -62,7 +52,7 @@ function searchForCity(event) {
         .then(function (data) {
             console.log(data);
 
-            for (var i = 6; i < data.list.length; i += 8) {
+            for (var i = 6; i < data.list.length; i+=8) {
                 document.getElementById('forecast-temp' + i).textContent = parseInt(data.list[i].main.temp) + "°";
                 document.getElementById('forecast-wind' + i).textContent = parseInt(data.list[i].wind.speed) + "mph";
                 document.getElementById('forecast-humidity' + i).textContent = parseInt(data.list[i].main.humidity) + "%";
