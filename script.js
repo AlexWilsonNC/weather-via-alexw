@@ -22,7 +22,8 @@ var iconCurrent = document.getElementById('iconCurrent');
 
 var cityList = [];
 
-function searchForCity() {
+function searchForCity(event) {
+    event.preventDefault();
     var cityName = searchField.value.charAt(0).toUpperCase() + searchField.value.slice(1).toLowerCase();
     // forcing any value entered, first char capitalized since I'm displaying their searched city on the page afterwards
     var requestUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=imperial&appid=" + APIKey;
