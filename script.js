@@ -12,23 +12,18 @@ var currentDateAtSearch = today.format('dddd - MMM D, YYYY');
 
 var searchButton = document.getElementById('search-button');
 var searchField = document.getElementById('text-field');
- 
+
 var currentSection = document.querySelector('.current');
 var currentTemp = document.getElementById('current-temp');
 var currentWind = document.getElementById('current-wind');
 var currentHumidity = document.getElementById('current-humidity');
 var currentUvi = document.getElementById('current-uvi');
 
-var forecastTemp1 = document.querySelector('.forecast-temp1');
-var forecastTemp2 = document.querySelector('.forecast-temp2');
-var forecastTemp3 = document.querySelector('.forecast-temp3');
-var forecastTemp4 = document.querySelector('.forecast-temp4');
-var forecastTemp5 = document.querySelector('.forecast-temp5');
-
 function searchForCity() {
-    var cityName = searchField.value.trim(); // text field in html's value
-// formats temperature to F°
+    var cityName = searchField.value.charAt(0).toUpperCase() + searchField.value.slice(1).toLowerCase();
+    // forcing any value entered, first char capitalized since I'm displaying their searched city on the page afterwards
     var requestUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=imperial&appid=" + APIKey;
+    var requestUrluvi = "https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&appid=" + APIKey;
     var requestUrlForecast = "http://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&units=imperial&appid=" + APIKey;
 
     fetch(requestUrl)
@@ -40,13 +35,22 @@ function searchForCity() {
             currentTemp.textContent = parseInt(data.main.temp) + "°"; // logs temp as forced whole num
             currentWind.textContent = "Wind: " + parseInt(data.wind.speed) + "mph";
             currentHumidity.textContent = "Humidity: " + data.main.humidity + "%";
-            currentUvi.textContent = "UVi: 0.55";
+            currentUvi.textContent = "UVi: 0.55"; ///////////////////////////////////////////////////////////////
             currentDate.textContent = currentDateAtSearch;
             tomorrow.textContent = today.add(1, 'd').format('ddd, MMM D'); // today +1
-            day2.textContent = today.add(1, 'd').format('ddd, MMM D'); // plus an day count followed
+            day2.textContent = today.add(1, 'd').format('ddd, MMM D'); // plus a day each count followed
             day3.textContent = today.add(1, 'd').format('ddd, MMM D');
             day4.textContent = today.add(1, 'd').format('ddd, MMM D');
             day5.textContent = today.add(1, 'd').format('ddd, MMM D');
+            document.getElementById('current-header').textContent = cityName;
+        });
+
+    fetch(requestUrluvi)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log("uv", data);
         });
 
     fetch(requestUrlForecast)
@@ -56,8 +60,10 @@ function searchForCity() {
         .then(function (data) {
             console.log(data);
 
-            for(var i = 6; i < data.list.length; i += 8) {
+            for (var i = 6; i < data.list.length; i += 8) {
                 document.getElementById('forecast-temp' + i).textContent = parseInt(data.list[i].main.temp) + "°";
+                document.getElementById('forecast-wind' + i).textContent = parseInt(data.list[i].wind.speed) + "mph";
+                document.getElementById('forecast-humidity' + i).textContent = parseInt(data.list[i].main.humidity) + "%";
             }
         });
 };
