@@ -48,7 +48,7 @@ input {
     top: 10px;
 }
 
-.search-history p {
+.search-history-p {
     margin-bottom: 9px;
     color: black;
 }
@@ -88,7 +88,7 @@ button:hover {
 
 .current-sections {
     display: inline-block;
-    margin: 50px 33px 0 33px;
+    margin: 50px 30px 0 30px;
     font-size: 38px;
 }
 
@@ -123,4 +123,10 @@ main {
     text-align: center;
     font-size: 42px;
     z-index: 100;
+}
+
+@media and screen (max-width: 900px) {
+    body {
+        
+    }
 }

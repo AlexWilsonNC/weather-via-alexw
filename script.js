@@ -11,6 +11,7 @@ var currentDateAtSearch = today.format('dddd - MMM D, YYYY');
 
 var searchButton = document.getElementById('search-button');
 var searchField = document.getElementById('text-field');
+var searchHistory = document.querySelector('.search-history');
 
 var currentSection = document.querySelector('.current');
 var currentTemp = document.getElementById('current-temp');
@@ -58,6 +59,24 @@ function searchForCity(event) {
                 document.getElementById('forecast-humidity' + i).textContent = parseInt(data.list[i].main.humidity) + "%";
             }
         });
+
+        localStorage.setItem('cityName', cityName);
+        renderLastSearched();
 };
+
+function renderLastSearched() {
+    var cityName = searchField.value.charAt(0).toUpperCase() + searchField.value.slice(1).toLowerCase();
+
+    for(var i = 0; i < 5; i++);
+    var searchedCity = document.createElement('button');
+    searchedCity.classList.add('search-history-p');
+    searchedCity.textContent = localStorage.getItem('cityName', cityName);
+    searchHistory.appendChild(searchedCity);
+    if (searchedCity[4]) {
+        searchedCity[0].textContent = searchedCity[4];
+    }
+
+    searchedCity.addEventListener('click', searchForCity);
+}
 
 searchButton.addEventListener('click', searchForCity);
