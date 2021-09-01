@@ -44,6 +44,9 @@ function searchForCity(event) {
             day4.textContent = today.add(1, 'd').format('ddd, MMM D');
             day5.textContent = today.add(1, 'd').format('ddd, MMM D');
             var header = document.getElementById('current-header').textContent = cityName;
+            var icon = data.weather[0].icon;
+            var iconUrl = "http://openweathermap.org/img/w/" + icon + ".png";
+            document.getElementById('current-icon').setAttribute('src', iconUrl);
         });
 
     fetch(requestUrlForecast)
