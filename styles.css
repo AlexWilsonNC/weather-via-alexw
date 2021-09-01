@@ -81,6 +81,12 @@ button:hover {
     text-align: center;
 }
 
+#current-icon {
+    position: absolute;
+    top: 0;
+    width: 100px;
+}
+
 #current-date {
     font-size: 16px;
     text-align: center;
