@@ -60,7 +60,6 @@ function searchForCity(event) {
                 document.getElementById('forecast-temp' + i).textContent = parseInt(data.list[i].main.temp) + "°";
                 document.getElementById('forecast-wind' + i).textContent = parseInt(data.list[i].wind.speed) + "mph";
                 document.getElementById('forecast-humidity' + i).textContent = parseInt(data.list[i].main.humidity) + "%";
-                
                 var iconForecast = data.list[i].weather[0].icon;
                 var iconUrlForecast = "http://openweathermap.org/img/w/" + iconForecast + ".png";
                 document.getElementById('forecast-icon' + i).setAttribute('src', iconUrlForecast);
