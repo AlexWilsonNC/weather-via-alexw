@@ -20,9 +20,9 @@ var currentHumidity = document.getElementById('current-humidity');
 var currentUvi = document.getElementById('current-uvi');
 var iconCurrent = document.getElementById('iconCurrent');
 
-function searchForCity(event) {
-    event.preventDefault();
-    var cityName = searchField.value.charAt(0).toUpperCase() + searchField.value.slice(1).toLowerCase();
+var listOfCities = JSON.parse(localStorage.getItem('cityNames')) || [];
+
+function searchForCity(cityName) {
     // forcing any value entered, first char capitalized since I'm displaying their searched city on the page afterwards
     var requestUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=imperial&appid=" + APIKey;
     var requestUrlForecast = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&units=imperial&appid=" + APIKey;
@@ -56,7 +56,7 @@ function searchForCity(event) {
         .then(function (data) {
             console.log(data);
 
-            for (var i = 6; i < data.list.length; i+=8) {
+            for (var i = 6; i < data.list.length; i += 8) {
                 document.getElementById('forecast-temp' + i).textContent = parseInt(data.list[i].main.temp) + "°";
                 document.getElementById('forecast-wind' + i).textContent = parseInt(data.list[i].wind.speed) + "mph";
                 document.getElementById('forecast-humidity' + i).textContent = parseInt(data.list[i].main.humidity) + "%";
@@ -64,27 +64,39 @@ function searchForCity(event) {
                 var iconUrlForecast = "http://openweathermap.org/img/w/" + iconForecast + ".png";
                 document.getElementById('forecast-icon' + i).setAttribute('src', iconUrlForecast);
             }
-            
+
         });
 
-        localStorage.setItem('cityName', cityName);
+    if (!listOfCities.includes(cityName)) {
+        listOfCities.push(cityName);
+        localStorage.setItem('cityNames', JSON.stringify(listOfCities));
         renderLastSearched();
+    }
 };
 
 function renderLastSearched() {
     var cityName = searchField.value.charAt(0).toUpperCase() + searchField.value.slice(1).toLowerCase();
-
-    for(var i = 0; i < 5; i++);
-    var searchedCity = document.createElement('button');
-    searchedCity.classList.add('search-history-p');
-    searchedCity.textContent = localStorage.getItem('cityName', cityName);
+    console.log(listOfCities)
     searchHistory.innerHTML = "";
-    searchHistory.appendChild(searchedCity);
-    if (searchedCity[4]) {
-        searchedCity[0].textContent = searchedCity[4];
+    for (var i = 0; i < listOfCities.length; i++) {
+        var searchedCity = document.createElement('button');
+        searchedCity.classList.add('search-history-p');
+        searchedCity.textContent = listOfCities[i];
+        searchHistory.appendChild(searchedCity);
     }
-
-    searchedCity.addEventListener('click', searchForCity);
 }
 
-searchButton.addEventListener('click', searchForCity);
+searchButton.addEventListener('click', function (event) {
+    var cityName = searchField.value.charAt(0).toUpperCase() + searchField.value.slice(1).toLowerCase();
+    searchForCity(cityName);
+});
+
+searchHistory.addEventListener('click', function (event) {
+    if (event.target.matches('.search-history-p')) {
+        var cityName = event.target.textContent;
+        searchForCity(cityName);
+    }
+
+});
+
+renderLastSearched()
