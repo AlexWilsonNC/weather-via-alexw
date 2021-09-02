@@ -78,6 +78,7 @@ function renderLastSearched() {
     var searchedCity = document.createElement('button');
     searchedCity.classList.add('search-history-p');
     searchedCity.textContent = localStorage.getItem('cityName', cityName);
+    searchHistory.innerHTML = "";
     searchHistory.appendChild(searchedCity);
     if (searchedCity[4]) {
         searchedCity[0].textContent = searchedCity[4];
